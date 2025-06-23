@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Carte de pixels bruités</title>
+  <style>
+    body {
+      background: #111;
+      color: white;
+      font-family: sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      padding-top: 40px;
+    }
+
+    canvas {
+      width: 400px;
+      height: 400px;
+      mask-image: url('mask.svg');
+      mask-mode: alpha;
+      mask-repeat: no-repeat;
+      mask-position: center;
+      mask-size: contain;
+
+      -webkit-mask-image: url('mask.svg');
+      -webkit-mask-mode: alpha;
+      -webkit-mask-repeat: no-repeat;
+      -webkit-mask-position: center;
+      -webkit-mask-size: contain;
+    }
+
+    input {
+      background: #222;
+      color: #fff;
+      padding: 6px;
+      border: 1px solid #555;
+      width: 300px;
+      font-size: 14px;
+    }
+
+    button {
+      padding: 6px 12px;
+      background: #444;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #666;
+    }
+  </style>
+</head>
+<body>
+
+  <input id="hexInput" type="text" placeholder="Entrez un code hex : 9f3a7d..." />
+  <button onclick="generate()">Générer</button>
+
+  <canvas id="canvas" width="400" height="400"></canvas>
+
+  <script>
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
+    const pixelSize = 10;
+
+    function hexToSeed(hex) {
+      let seed = 0;
+      for (let i = 0; i < hex.length; i++) {
+        seed += hex.charCodeAt(i) * (i + 1);
+      }
+      return seed;
+    }
+
+    function seededRandom(seed) {
+      const x = Math.sin(seed++) * 10000;
+      return x - Math.floor(x);
+    }
+
+    function generate() {
+      const hex = document.getElementById("hexInput").value.trim().toLowerCase().replace(/[^0-9a-f]/g, "");
+      const seedBase = hexToSeed(hex);
+
+      let i = 0;
+      for (let x = 0; x < canvas.width; x += pixelSize) {
+        for (let y = 0; y < canvas.height; y += pixelSize) {
+          const r = Math.floor(seededRandom(seedBase + i) * 256);
+          const g = Math.floor(seededRandom(seedBase + i + 1000) * 256);
+          const b = Math.floor(seededRandom(seedBase + i + 2000) * 256);
+          ctx.fillStyle = `rgb(${r}, ${g}, ${b})`;
+          ctx.fillRect(x, y, pixelSize, pixelSize);
+          i++;
+        }
+      }
+    }
+  </script>
+
+</body>
+</html>
