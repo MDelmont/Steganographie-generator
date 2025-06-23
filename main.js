@@ -11,7 +11,9 @@ const allOptionIds = [
   'textY',
   'textAngle',
   'textNoise',
-  'blurRadius'
+  'blurRadius',
+  'channel',
+  'contrast'
 ];
 
 function toggleOptions(visible = []) {
