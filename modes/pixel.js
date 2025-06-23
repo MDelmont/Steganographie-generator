@@ -80,6 +80,7 @@ export default {
     textX: 50,
     textY: 50,
     textAngle: 0,
-    textNoise: 10
+    textNoise: 10,
+    blurRadius: 0
   }
 };
