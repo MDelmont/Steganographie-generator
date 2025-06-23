@@ -72,8 +72,8 @@ export default {
   name: 'Pixel',
   generate: generatePixelMap,
   options: {
-    backgroundColors: '#FF5733, #33FF57, #3357FF, #F3FF33, #33FFF3',
-    textColors: '#000000, #222222, #111111',
+    backgroundColors: '#FFF5F5, #FFE3E3, #FFA8A8, #FFC9C9, #FF6B6B, #FF8787, #FA5252, #E03131, #C92A2A, #F03E3E',
+    textColors: '#E8F5E9, #C8E6C9, #A5D6A7, #81C784, #66BB6A, #4CAF50, #43A047, #388E3C, #2E7D32, #1B5E20',
     pixelSize: 5,
     hiddenText: 'Hello',
     textSize: 25,
