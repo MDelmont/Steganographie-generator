@@ -67,3 +67,19 @@ export function generatePixelMap() {
     ctx.globalCompositeOperation = 'source-over';
   }
 }
+
+export default {
+  name: 'Pixel',
+  generate: generatePixelMap,
+  options: {
+    backgroundColors: '#FF5733, #33FF57, #3357FF, #F3FF33, #33FFF3',
+    textColors: '#000000, #222222, #111111',
+    pixelSize: 5,
+    hiddenText: 'Hello',
+    textSize: 25,
+    textX: 50,
+    textY: 50,
+    textAngle: 0,
+    textNoise: 10
+  }
+};
