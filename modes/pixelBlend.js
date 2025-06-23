@@ -4,8 +4,10 @@ export function generateBlendPixelMap() {
   generatePixelMap();
   const canvas = document.getElementById('canvas');
   const ctx = canvas.getContext('2d');
+
   const strength =
     (parseFloat(document.getElementById('blendStrength').value) || 50) / 100;
+
 
   const width = canvas.width;
   const height = canvas.height;
@@ -15,6 +17,7 @@ export function generateBlendPixelMap() {
 
   for (let y = 0; y < height; y++) {
     for (let x = 0; x < width; x++) {
+
       let r = 0,
         g = 0,
         b = 0,
@@ -24,6 +27,7 @@ export function generateBlendPixelMap() {
           const nx = x + dx;
           const ny = y + dy;
           if (nx >= 0 && nx < width && ny >= 0 && ny < height) {
+
             const idx = (ny * width + nx) * 4;
             r += data[idx];
             g += data[idx + 1];
@@ -33,12 +37,14 @@ export function generateBlendPixelMap() {
         }
       }
       const idx = (y * width + x) * 4;
+
       const ar = r / count;
       const ag = g / count;
       const ab = b / count;
       out[idx] = data[idx] * (1 - strength) + ar * strength;
       out[idx + 1] = data[idx + 1] * (1 - strength) + ag * strength;
       out[idx + 2] = data[idx + 2] * (1 - strength) + ab * strength;
+
       out[idx + 3] = 255;
     }
   }
@@ -54,4 +60,5 @@ export default {
     blendStrength: 50
   },
   visibleOptions: [...pixel.visibleOptions, 'blendStrength']
+
 };
