@@ -20,9 +20,8 @@ export function generatePixelMap() {
   }
 
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  // Ensure the pixel grid fully covers the canvas
-  const cols = Math.ceil(canvas.width / pixelSize);
-  const rows = Math.ceil(canvas.height / pixelSize);
+  const cols = Math.floor(canvas.width / pixelSize);
+  const rows = Math.floor(canvas.height / pixelSize);
 
   const temp = document.createElement('canvas');
   temp.width = cols;
