@@ -80,7 +80,10 @@ export default {
     textX: 50,
     textY: 50,
     textAngle: 0,
-    textNoise: 10,
-    blurRadius: 0
-  }
+    textNoise: 10
+  },
+  visibleOptions: [
+    'backgroundColors', 'textColors', 'pixelSize', 'hiddenText', 'textSize',
+    'textX', 'textY', 'textAngle', 'textNoise'
+  ]
 };

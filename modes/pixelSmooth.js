@@ -24,5 +24,6 @@ export default {
   options: {
     ...pixel.options,
     blurRadius: 2
-  }
+  },
+  visibleOptions: [...pixel.visibleOptions, 'blurRadius']
 };
