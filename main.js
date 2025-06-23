@@ -11,8 +11,7 @@ const allOptionIds = [
   'textY',
   'textAngle',
   'textNoise',
-  'blurRadius',
-  'blendStrength'
+  'blurRadius'
 ];
 
 function toggleOptions(visible = []) {
