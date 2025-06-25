@@ -5,26 +5,26 @@ export function parseColors(str) {
     .map(c => c.startsWith('#') ? c : '#' + c);
 }
 
+export function updateColorPreview(inputId, previewId) {
+  const colors = parseColors(document.getElementById(inputId).value);
+  const preview = document.getElementById(previewId);
+  preview.innerHTML = '';
+  colors.forEach(color => {
+    const box = document.createElement('div');
+    box.className = 'color-box';
+    box.style.backgroundColor = color;
+    preview.appendChild(box);
+  });
+}
+
 export function setupPreview() {
-  const update = (inputId, previewId) => {
-    const colors = parseColors(document.getElementById(inputId).value);
-    const preview = document.getElementById(previewId);
-    preview.innerHTML = '';
-    colors.forEach(color => {
-      const box = document.createElement('div');
-      box.className = 'color-box';
-      box.style.backgroundColor = color;
-      preview.appendChild(box);
-    });
-  };
-
   document.getElementById('backgroundColors').addEventListener('input', () =>
-    update('backgroundColors', 'bgColorPreview'));
+    updateColorPreview('backgroundColors', 'bgColorPreview'));
   document.getElementById('textColors').addEventListener('input', () =>
-    update('textColors', 'textColorPreview'));
+    updateColorPreview('textColors', 'textColorPreview'));
 
-  update('backgroundColors', 'bgColorPreview');
-  update('textColors', 'textColorPreview');
+  updateColorPreview('backgroundColors', 'bgColorPreview');
+  updateColorPreview('textColors', 'textColorPreview');
 }
 
 export let maskImage = null;
@@ -47,4 +47,22 @@ export function setupMaskUpload() {
       maskImage = null;
     }
   });
+}
+
+export function hexToRgb(hex) {
+  hex = hex.replace('#', '');
+  if (hex.length === 3) {
+    hex = hex.split('').map(c => c + c).join('');
+  }
+  const num = parseInt(hex, 16);
+  return {
+    r: (num >> 16) & 255,
+    g: (num >> 8) & 255,
+    b: num & 255
+  };
+}
+
+export function rgbToHex({ r, g, b }) {
+  const toHex = c => Math.max(0, Math.min(255, c)).toString(16).padStart(2, '0');
+  return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
 }

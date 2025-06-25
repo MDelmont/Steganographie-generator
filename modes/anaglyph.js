@@ -1,8 +1,9 @@
-import { parseColors, maskImage } from '../utils.js';
+import pixel from './pixel.js';
+import { parseColors, maskImage, hexToRgb, rgbToHex } from '../utils.js';
 
-export function generatePixelMap() {
-  const canvas = document.getElementById("canvas");
-  const ctx = canvas.getContext("2d");
+export function generateAnaglyph() {
+  const canvas = document.getElementById('canvas');
+  const ctx = canvas.getContext('2d');
 
   const bgColors = parseColors(document.getElementById('backgroundColors').value);
   const textColors = parseColors(document.getElementById('textColors').value);
@@ -15,7 +16,7 @@ export function generatePixelMap() {
   const textNoise = parseFloat(document.getElementById('textNoise').value) || 0;
 
   if (!text || bgColors.length === 0 || textColors.length === 0) {
-    alert("Veuillez fournir un texte, des couleurs de fond et de texte.");
+    alert('Veuillez fournir un texte, des couleurs de fond et de texte.');
     return;
   }
 
@@ -51,12 +52,16 @@ export function generatePixelMap() {
     for (let x = 0; x < cols; x++) {
       const index = (y * cols + x) * 4;
       const isText = mask[index] < 128;
-      let color = isText
-        ? textColors[Math.floor(Math.random() * textColors.length)]
-        : (Math.random() * 100 < textNoise
-          ? textColors[Math.floor(Math.random() * textColors.length)]
-          : bgColors[Math.floor(Math.random() * bgColors.length)]);
-      ctx.fillStyle = color;
+      const base = hexToRgb(bgColors[Math.floor(Math.random() * bgColors.length)]);
+      let color = { ...base };
+      if (isText || Math.random() * 100 < textNoise) {
+        const txt = hexToRgb(textColors[Math.floor(Math.random() * textColors.length)]);
+        // encode in red and cyan
+        color.r = txt.r;
+        color.g = txt.g;
+        color.b = base.b;
+      }
+      ctx.fillStyle = rgbToHex(color);
       ctx.fillRect(x * pixelSize, y * pixelSize, pixelSize, pixelSize);
     }
   }
@@ -69,21 +74,8 @@ export function generatePixelMap() {
 }
 
 export default {
-  name: 'Pixel',
-  generate: generatePixelMap,
-  options: {
-    backgroundColors: '#FFF5F5, #FFE3E3, #FFA8A8, #FFC9C9, #FF6B6B, #FF8787, #FA5252, #E03131, #C92A2A, #F03E3E',
-    textColors: '#E8F5E9, #C8E6C9, #A5D6A7, #81C784, #66BB6A, #4CAF50, #43A047, #388E3C, #2E7D32, #1B5E20',
-    pixelSize: 5,
-    hiddenText: 'Hello',
-    textSize: 25,
-    textX: 50,
-    textY: 50,
-    textAngle: 0,
-    textNoise: 10
-  },
-  visibleOptions: [
-    'backgroundColors', 'textColors', 'pixelSize', 'hiddenText', 'textSize',
-    'textX', 'textY', 'textAngle', 'textNoise'
-  ]
+  name: 'Anaglyphe',
+  generate: generateAnaglyph,
+  options: pixel.options,
+  visibleOptions: pixel.visibleOptions
 };
