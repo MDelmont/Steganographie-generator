@@ -37,6 +37,9 @@ Semblable au contraste différentiel mais avec un contraste fixe très faible (5
 ### Inversion Chromatique
 Inverse les composantes de couleur du texte par rapport à la palette fournie, donnant un effet de négatif.
 
+### L*a*b* Distance Steganography
+Encode un message binaire en modulant les distances de couleur entre paires de pixels dans l'espace L*a*b*. Permet un contrôle fin du nombre de bits par pixel et deux méthodes de modification (palette ou cube).
+
 ## Utilisation
 
 1. Choisissez un mode dans la liste.

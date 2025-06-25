@@ -6,6 +6,7 @@ import differentialContrast from './differentialContrast.js';
 import anaglyph from './anaglyph.js';
 import physicalFilter from './physicalFilter.js';
 import chromaticInvert from './chromaticInvert.js';
+import labStego from './labStego.js';
 
 export default [
   pixel,
@@ -15,5 +16,6 @@ export default [
   differentialContrast,
   anaglyph,
   physicalFilter,
-  chromaticInvert
+  chromaticInvert,
+  labStego
 ];

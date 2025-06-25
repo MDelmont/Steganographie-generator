@@ -13,7 +13,12 @@ const allOptionIds = [
   'textNoise',
   'blurRadius',
   'channel',
-  'contrast'
+  'contrast',
+  'message',
+  'method',
+  'cubeSize',
+  'bitsPerPixel',
+  'key'
 ];
 
 function toggleOptions(visible = []) {
