@@ -75,10 +75,28 @@
 
     <label for="maskUpload">Téléverser un masque SVG :</label>
     <input type="file" id="maskUpload" accept=".svg" />
+    
+    <div class="reveal-controls">
+      <label>
+        <input type="checkbox" id="enableReveal" />
+        Afficher la superposition
+      </label>
+      <div id="revealOptions" style="display: none; margin-top: 10px;">
+        <label for="revealColor">Couleur :</label>
+        <input type="color" id="revealColor" value="#FF0000" />
+        <label for="revealOpacity">Opacité :</label>
+        <input type="range" id="revealOpacity" min="0" max="100" value="50" />
+        <span id="opacityValue">50%</span>
+      </div>
+    </div>
+    
     <button onclick="generate()">Générer</button>
   </div>
 
-  <canvas id="canvas" width="400" height="400"></canvas>
+  <div class="canvas-container">
+    <canvas id="canvas" width="400" height="400"></canvas>
+    <div id="overlay" class="overlay"></div>
+  </div>
 
   <script type="module" src="main.js"></script>
 </body>

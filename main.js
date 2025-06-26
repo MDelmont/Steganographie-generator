@@ -88,3 +88,51 @@ function setupModes() {
 setupPreview();
 setupMaskUpload();
 setupModes();
+
+// Gestion de l'overlay de révélation
+const overlay = document.getElementById('overlay');
+const enableReveal = document.getElementById('enableReveal');
+const revealOptions = document.getElementById('revealOptions');
+const revealColor = document.getElementById('revealColor');
+const revealOpacity = document.getElementById('revealOpacity');
+const opacityValue = document.getElementById('opacityValue');
+
+function updateOverlay() {
+  if (enableReveal.checked) {
+    const color = revealColor.value;
+    const opacity = parseInt(revealOpacity.value) / 100;
+    overlay.style.display = 'block';
+    overlay.style.backgroundColor = color;
+    overlay.style.opacity = opacity;
+  } else {
+    overlay.style.display = 'none';
+  }
+}
+
+// Événements
+enableReveal.addEventListener('change', function() {
+  revealOptions.style.display = this.checked ? 'block' : 'none';
+  updateOverlay();
+});
+
+revealColor.addEventListener('input', updateOverlay);
+
+revealOpacity.addEventListener('input', function() {
+  opacityValue.textContent = this.value + '%';
+  updateOverlay();
+});
+
+// Initialisation
+updateOverlay();
+
+// Mettre à jour la taille de l'overlay si le canvas change de taille
+const resizeObserver = new ResizeObserver(entries => {
+  for (let entry of entries) {
+    if (entry.target.id === 'canvas') {
+      overlay.style.width = entry.contentRect.width + 'px';
+      overlay.style.height = entry.contentRect.height + 'px';
+    }
+  }
+});
+
+resizeObserver.observe(document.getElementById('canvas'));
