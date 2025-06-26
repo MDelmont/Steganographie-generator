@@ -1,6 +1,7 @@
 import pixel from './pixel.js';
 import pixelSmooth from './pixelSmooth.js';
 import pixelContour from './pixelContour.js';
+import pixelDoubleContour from './pixelDoubleContour.js';
 import selectiveChannel from './selectiveChannel.js';
 import dichromatic from './dichromatic.js';
 import differentialContrast from './differentialContrast.js';
@@ -14,6 +15,7 @@ export default [
   pixel,
   pixelSmooth,
   pixelContour,
+  pixelDoubleContour,
   selectiveChannel,
   dichromatic,
   differentialContrast,
