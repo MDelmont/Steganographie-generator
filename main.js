@@ -11,6 +11,7 @@ const allOptionIds = [
   'textY',
   'textAngle',
   'textNoise',
+  'protectionRadius',
   'blurRadius',
   'channel',
   'contrast',
