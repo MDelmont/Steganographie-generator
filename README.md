@@ -19,6 +19,13 @@ Créé une mosaïque de pixels colorés. Les pixels correspondant au texte utili
 ### Pixel Smooth
 Identique au mode *Pixel* mais applique un flou optionnel pour adoucir l’image.
 
+### Pixel Double Contour
+Variante du mode *Pixel avec Contour* permettant d’inscrire deux textes
+distincts. Le premier est dessiné avec la palette de fond et son pourtour est
+bruité avec les couleurs de texte. Le second utilise la palette de texte et est
+protégé par du bruit aux couleurs de fond. Les autres réglages (taille des
+pixels, bruit, zone de protection…) s’appliquent aux deux inscriptions.
+
 ### RGB Alterné
 Ajuste uniquement l’un des canaux `R`, `G` ou `B` pour coder le texte. Les autres canaux conservent des valeurs aléatoires, ce qui rend l’inscription plus discrète.
 
